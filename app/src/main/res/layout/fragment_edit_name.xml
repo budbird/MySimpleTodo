@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_edit_name.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/editItemActivityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit item below:"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="10dp"/>
+
+    <EditText
+        android:id="@+id/editItemActivityEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3dp"
+        android:layout_marginBottom="15dp"
+        android:inputType="text"
+        android:imeOptions="actionDone"
+        />
+
+
+    <TextView
+        android:id="@+id/datePickerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Due Date:"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="10dp"/>
+
+    <!-- https://stackoverflow.com/questions/42184436/how-to-set-android-datepicker-mode-to-spinner-for-apis-below-level-21 -->
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:spinnersShown="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp">
+    </DatePicker>
+
+    <TextView
+        android:id="@+id/priorityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose priority below:"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="10dp"/>
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton android:id="@+id/radio_high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Low"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/editItemActivityButton"
+        android:onClick="onSaveItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="SAVE"
+        android:layout_marginVertical="5dp"
+
+        />
+</LinearLayout>
