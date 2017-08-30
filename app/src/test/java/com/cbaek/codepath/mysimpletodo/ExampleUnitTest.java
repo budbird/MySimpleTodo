@@ -1,4 +1,4 @@
-package codepath.cbaek.com.mysimpletodo;
+package com.cbaek.codepath.mysimpletodo;
 
 import org.junit.Test;
 

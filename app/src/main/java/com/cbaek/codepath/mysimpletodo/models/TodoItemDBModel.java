@@ -1,16 +1,14 @@
-package codepath.cbaek.com.mysimpletodo;
+package com.cbaek.codepath.mysimpletodo.models;
+
+import com.cbaek.codepath.mysimpletodo.data.TodoItemDatabase;
+import com.raizlabs.android.dbflow.annotation.Table;
 
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Table(database = MyDatabase.class)
+@Table(database = TodoItemDatabase.class)
 public class TodoItemDBModel extends BaseModel {
     @Column
     @PrimaryKey
@@ -47,5 +45,15 @@ public class TodoItemDBModel extends BaseModel {
     public void setDay(int day) {
         this.day = day;
     }
+
+
+    public String getItemName() { return this.itemName;};
+    public String getPriority() { return this.priority;};
+
+    public int getYear() { return this.year;};
+    public int getMonth() { return this.month;};
+    public int getDay() { return this.day;};
+
+
 
 }

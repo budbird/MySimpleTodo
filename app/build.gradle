@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
     defaultConfig {
-        applicationId "codepath.cbaek.com.mysimpletodo"
+        applicationId "com.cbaek.codepath.mysimpletodo"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1

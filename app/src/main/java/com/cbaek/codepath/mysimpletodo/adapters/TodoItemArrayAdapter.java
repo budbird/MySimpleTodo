@@ -1,4 +1,4 @@
-package codepath.cbaek.com.mysimpletodo;
+package com.cbaek.codepath.mysimpletodo.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.cbaek.codepath.mysimpletodo.R;
+import com.cbaek.codepath.mysimpletodo.models.TodoItemArrayListModel;
 
 import java.util.ArrayList;
 
@@ -22,19 +25,19 @@ public class TodoItemArrayAdapter extends ArrayAdapter<TodoItemArrayListModel> {
         TodoItemArrayListModel todoItemArrayListModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_todo, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(com.cbaek.codepath.mysimpletodo.R.layout.main_list_todo_item, parent, false);
         }
         // Lookup view for data population
-        TextView itemName = (TextView) convertView.findViewById(R.id.item_name);
-        TextView itemPriority = (TextView) convertView.findViewById(R.id.item_priority);
+        TextView itemName = (TextView) convertView.findViewById(com.cbaek.codepath.mysimpletodo.R.id.item_name);
+        TextView itemPriority = (TextView) convertView.findViewById(com.cbaek.codepath.mysimpletodo.R.id.item_priority);
 
-        TextView itemDueDate = (TextView) convertView.findViewById(R.id.item_due_date);
+        TextView itemDueDate = (TextView) convertView.findViewById(com.cbaek.codepath.mysimpletodo.R.id.item_due_date);
 
         // Populate the data into the template view using the data object
         itemName.setText(todoItemArrayListModel.itemName);
         itemPriority.setText(todoItemArrayListModel.priority);
         itemDueDate.setText(todoItemArrayListModel.month + "/" + todoItemArrayListModel.day + "/" + todoItemArrayListModel.year);
-        itemDueDate.setTextColor(Color.parseColor("#3F51B5"));
+        itemDueDate.setTextColor(getContext().getResources().getColor(R.color.colorDueDate));
 
         int color = Color.BLACK;
         switch (todoItemArrayListModel.priority) {

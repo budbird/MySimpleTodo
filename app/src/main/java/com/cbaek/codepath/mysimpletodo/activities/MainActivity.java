@@ -1,15 +1,20 @@
-package codepath.cbaek.com.mysimpletodo;
+package com.cbaek.codepath.mysimpletodo.activities;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cbaek.codepath.mysimpletodo.adapters.TodoItemArrayAdapter;
+import com.cbaek.codepath.mysimpletodo.fragments.TodoItemEditDialogFragment;
+import com.cbaek.codepath.mysimpletodo.models.TodoItemArrayListModel;
+import com.cbaek.codepath.mysimpletodo.models.TodoItemDBModel;
+
+import com.cbaek.codepath.mysimpletodo.models.TodoItemDBModel_Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.ArrayList;
@@ -17,7 +22,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements EditNameDialogFragment.EditNameDialogListener {
+public class MainActivity extends AppCompatActivity implements TodoItemEditDialogFragment.EditNameDialogListener {
 
     ArrayList<TodoItemArrayListModel> items;
     ListView lvItems;
@@ -27,9 +32,9 @@ public class MainActivity extends AppCompatActivity implements EditNameDialogFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(com.cbaek.codepath.mysimpletodo.R.layout.main_activity);
 
-        lvItems = (ListView) findViewById(R.id.lvItems);
+        lvItems = (ListView) findViewById(com.cbaek.codepath.mysimpletodo.R.id.lvItems);
         items = new ArrayList<TodoItemArrayListModel>();
 
         readData();
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements EditNameDialogFra
     }
 
     public void onAddItem(View v) {
-        EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
+        EditText etNewItem = (EditText) findViewById(com.cbaek.codepath.mysimpletodo.R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
         if (!itemText.isEmpty()) {
             // Use the current date as the default date in the picker
@@ -79,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements EditNameDialogFra
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l ) {
                         FragmentManager fm = getSupportFragmentManager();
-                        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("edit_dialog");
+                        TodoItemEditDialogFragment todoItemEditDialogFragment = TodoItemEditDialogFragment.newInstance("edit_dialog");
                         Bundle bundle = new Bundle();
                         bundle.putString("item_title", items.get(i).itemName);
 
@@ -104,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements EditNameDialogFra
                         bundle.putInt("item_index", i);
                         bundle.putInt("item_priority_index", priorityIndex);
 
-                        editNameDialogFragment.setArguments(bundle);
-                        editNameDialogFragment.show(fm, "fragment_edit_name");
+                        todoItemEditDialogFragment.setArguments(bundle);
+                        todoItemEditDialogFragment.show(fm, "edit_dialog_fragment");
                     }
                 }
         );
@@ -148,7 +153,8 @@ public class MainActivity extends AppCompatActivity implements EditNameDialogFra
 
         while (todoItemModelIterator.hasNext()) {
             TodoItemDBModel todoItem = todoItemModelIterator.next();
-            items.add(new TodoItemArrayListModel(todoItem.itemName, todoItem.priority, todoItem.year, todoItem.month, todoItem.day));
+            items.add(new TodoItemArrayListModel(todoItem.getItemName(), todoItem.getPriority(),
+                    todoItem.getYear(), todoItem.getMonth(), todoItem.getDay()));
         }
     }
 
@@ -161,55 +167,8 @@ public class MainActivity extends AppCompatActivity implements EditNameDialogFra
                 Toast.LENGTH_SHORT).show();
 
         updateData(items.get(index).itemName, inputText, priority, year, month, day);
-        //items.set(index, inputText);
         items.set(index, new TodoItemArrayListModel(inputText, priority, year, month, day));
-        //itemsAdapter.notifyDataSetChanged();
         todoItemArrayAdapter.notifyDataSetChanged();
     }
-
-
-
-    // ** For using text file **
-//    private void readItems() {
-//
-//        File filesDir = getFilesDir();
-//        File todoFile = new File(filesDir, "todo.txt");
-//        try {
-//            items = new ArrayList<String>(FileUtils.readLines(todoFile));
-//        } catch (IOException e) {
-//            items =new ArrayList<String>();
-//        }
-//    }
-
-    // ** For using text file **
-//    private void writeItems() {
-//        File filesDir =  getFilesDir();
-//        File todoFile = new File(filesDir, "todo.txt");
-//        try {
-//            FileUtils.writeLines(todoFile, items);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
-    // ** For using activity **
-//   @Override
-//    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-//            String newItemTitle = data.getExtras().getString("newText");
-//            int itemIndex = data.getExtras().getInt("itemIndex");
-//
-//            updateData(items.get(itemIndex), newItemTitle);
-//            items.set(itemIndex, newItemTitle);
-//            itemsAdapter.notifyDataSetChanged();
-//
-//        }
-//
-//    }
-
-
-
-
 
 }

@@ -1,4 +1,4 @@
-package codepath.cbaek.com.mysimpletodo;
+package com.cbaek.codepath.mysimpletodo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
